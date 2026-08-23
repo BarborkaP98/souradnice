@@ -107,15 +107,30 @@ function nakresliSit(){
 }
 function zobrazUkol(){
 
-    if(aktualniBod >= obrazek.length){
+if(aktualniBod >= obrazek.length){
 
-        document.getElementById("vypis").textContent =
-            "Hotovo!";
-        return;
+    vyhodnot();
+    return;
+}
+    document.getElementById("vypis").textContent =
+        `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
+}
+function vyhodnot(){
+
+    let spravne = 0;
+
+    for(let i = 0; i < obrazek.length; i++){
+
+        if(
+            odpovedi[i][0] === obrazek[i][0] &&
+            odpovedi[i][1] === obrazek[i][1]
+        ){
+            spravne++;
+        }
     }
 
     document.getElementById("vypis").textContent =
-        `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
+        `Správně ${spravne} z ${obrazek.length}`;
 }
 nakresliSit();
 zobrazUkol();
