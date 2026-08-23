@@ -5,7 +5,14 @@ const krok = 50;
 
 const levyOkraj = 50;
 const horniOkraj = 100;
+const obrazek = [
+    [2,6],
+    [5,9],
+    [8,6],
+    [8,2]
+];
 
+let aktualniBod = 0;
 function nakresliSit(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -97,8 +104,20 @@ function nakresliSit(){
         horniOkraj - 45
     );
 }
+function zobrazUkol(){
 
+    if(aktualniBod >= obrazek.length){
+
+        document.getElementById("vypis").textContent =
+            "Hotovo!";
+        return;
+    }
+
+    document.getElementById("vypis").textContent =
+        `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
+}
 nakresliSit();
+zobrazUkol();
 
 canvas.addEventListener("click", function(e){
 
@@ -126,7 +145,7 @@ canvas.addEventListener("click", function(e){
     );
     ctx.fill();
 
-    document.getElementById("vypis").textContent =
-        `Souřadnice: [${x},${y}]`;
+ aktualniBod++;
+zobrazUkol();
 });
 
