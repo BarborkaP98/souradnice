@@ -2,30 +2,33 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Souřadnice</title>
 
 <style>
 body{
     font-family: Arial, sans-serif;
-    text-align: center;
+    text-align:center;
 }
 
 canvas{
-    border: none;
-    margin-top: 20px;
+    margin-top:20px;
+}
+
+h1{
+    margin-bottom:10px;
 }
 </style>
-
 </head>
+
 <body>
 
 <h1>Procvičování souřadnic</h1>
 
-<p>Klikni do sítě.</p>
+<p id="vypis">Klikni do sítě.</p>
 
-<p id="souradnice">Souřadnice:</p>
-
-<canvas id="platno" width="620" height="670"></canvas>
+<canvas id="platno" width="650" height="700"></canvas>
 
 <script>
 
@@ -34,90 +37,93 @@ const ctx = canvas.getContext("2d");
 
 const krok = 50;
 
+const levyOkraj = 50;
+const horniOkraj = 100;
+const velikost = 500;
+
 function nakresliSit(){
 
-    const levyOkraj = 50;
-    const horniOkraj = 75;
-    const velikostSite = 500;
-
-    ctx.clearRect(0,0,620,670);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
     // mřížka
-    for(let i = 0; i <= 10; i++){
+    ctx.strokeStyle = "#d8d8d8";
+    ctx.lineWidth = 1;
+
+    for(let i=0;i<=10;i++){
 
         ctx.beginPath();
         ctx.moveTo(levyOkraj + i*krok, horniOkraj);
-        ctx.lineTo(levyOkraj + i*krok, horniOkraj + velikostSite);
-        ctx.strokeStyle = "#d0d0d0";
-        ctx.lineWidth = 1;
+        ctx.lineTo(levyOkraj + i*krok, horniOkraj + velikost);
         ctx.stroke();
 
         ctx.beginPath();
         ctx.moveTo(levyOkraj, horniOkraj + i*krok);
-        ctx.lineTo(levyOkraj + velikostSite, horniOkraj + i*krok);
+        ctx.lineTo(levyOkraj + velikost, horniOkraj + i*krok);
         ctx.stroke();
     }
 
     // osa X
-    ctx.beginPath();
-    ctx.moveTo(levyOkraj, horniOkraj + velikostSite);
-    ctx.lineTo(levyOkraj + velikostSite + 20, horniOkraj + velikostSite);
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    ctx.moveTo(levyOkraj, horniOkraj + velikost);
+    ctx.lineTo(levyOkraj + velikost + 20, horniOkraj + velikost);
     ctx.stroke();
 
     // šipka X
     ctx.beginPath();
-    ctx.moveTo(levyOkraj + velikostSite + 20, horniOkraj + velikostSite);
-    ctx.lineTo(levyOkraj + velikostSite + 10, horniOkraj + velikostSite - 5);
-    ctx.lineTo(levyOkraj + velikostSite + 10, horniOkraj + velikostSite + 5);
+    ctx.moveTo(levyOkraj + velikost + 20, horniOkraj + velikost);
+    ctx.lineTo(levyOkraj + velikost + 10, horniOkraj + velikost - 6);
+    ctx.lineTo(levyOkraj + velikost + 10, horniOkraj + velikost + 6);
     ctx.closePath();
     ctx.fill();
 
     // osa Y
     ctx.beginPath();
-    ctx.moveTo(levyOkraj, horniOkraj + velikostSite);
+    ctx.moveTo(levyOkraj, horniOkraj + velikost);
     ctx.lineTo(levyOkraj, horniOkraj - 30);
     ctx.stroke();
 
     // šipka Y
     ctx.beginPath();
     ctx.moveTo(levyOkraj, horniOkraj - 30);
-    ctx.lineTo(levyOkraj - 5, horniOkraj - 20);
-    ctx.lineTo(levyOkraj + 5, horniOkraj - 20);
+    ctx.lineTo(levyOkraj - 6, horniOkraj - 18);
+    ctx.lineTo(levyOkraj + 6, horniOkraj - 18);
     ctx.closePath();
     ctx.fill();
 
-    // čísla na ose X
+    // číslování X
     ctx.font = "14px Arial";
+
     for(let i=0;i<=10;i++){
+
         ctx.fillText(
             i,
-            levyOkraj - 5 + i*krok,
-            horniOkraj + velikostSite + 22
+            levyOkraj + i*krok - 5,
+            horniOkraj + velikost + 22
         );
     }
 
-    // čísla na ose Y
+    // číslování Y
     for(let i=0;i<=10;i++){
+
         ctx.fillText(
             i,
             levyOkraj - 22,
-            horniOkraj + velikostSite - i*krok + 5
+            horniOkraj + velikost - i*krok + 5
         );
     }
 
     // označení os
     ctx.font = "bold 22px Arial";
 
-    // x za šipkou
     ctx.fillText(
         "x",
-        levyOkraj + velikostSite + 30,
-        horniOkraj + velikostSite + 8
+        levyOkraj + velikost + 30,
+        horniOkraj + velikost + 8
     );
 
-    // y NAD šipkou
     ctx.fillText(
         "y",
         levyOkraj - 7,
@@ -131,32 +137,33 @@ canvas.addEventListener("click", function(e){
 
     const rect = canvas.getBoundingClientRect();
 
-   const levyOkraj = 50;
-const horniOkraj = 75;
+    const x = Math.round(
+        (e.clientX - rect.left - levyOkraj) / krok
+    );
 
-const x = Math.round(
-    (e.clientX - rect.left - levyOkraj) / krok
-);
+    const y = 10 - Math.round(
+        (e.clientY - rect.top - horniOkraj) / krok
+    );
 
-const y = 10 - Math.round(
-    (e.clientY - rect.top - horniOkraj) / krok
-);
-
-    document.getElementById("souradnice").innerText =
-        `Souřadnice: [${x},${y}]`;
+    if(
+        x < 0 || x > 10 ||
+        y < 0 || y > 10
+    ){
+        return;
+    }
 
     ctx.beginPath();
-    const levyOkraj = 50;
-const horniOkraj = 75;
-
-ctx.arc(
-    levyOkraj + x*krok,
-    horniOkraj + (10-y)*krok,
-    5,
-    0,
-    2 * Math.PI
-);
+    ctx.arc(
+        levyOkraj + x*krok,
+        horniOkraj + (10-y)*krok,
+        5,
+        0,
+        Math.PI * 2
+    );
     ctx.fill();
+
+    document.getElementById("vypis").textContent =
+        `Souřadnice: [${x},${y}]`;
 });
 
 </script>
