@@ -36,7 +36,7 @@ const krok = 50;
 
 function nakresliSit(){
 
-    ctx.clearRect(0,0,550,550);
+    ctx.clearRect(0,0,620,620);
 
     // mřížka
     for(let i = 0; i <= 10; i++){
@@ -44,7 +44,8 @@ function nakresliSit(){
         ctx.beginPath();
         ctx.moveTo(25 + i*krok, 25);
         ctx.lineTo(25 + i*krok, 525);
-        ctx.strokeStyle = "#cccccc";
+        ctx.strokeStyle = "#d0d0d0";
+        ctx.lineWidth = 1;
         ctx.stroke();
 
         ctx.beginPath();
@@ -56,47 +57,52 @@ function nakresliSit(){
     // osa X
     ctx.beginPath();
     ctx.moveTo(25,525);
-    ctx.lineTo(540,525);
+    ctx.lineTo(545,525);
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // šipka osy X
+    // šipka X
     ctx.beginPath();
-    ctx.moveTo(540,525);
-    ctx.lineTo(532,520);
-    ctx.lineTo(532,530);
+    ctx.moveTo(545,525);
+    ctx.lineTo(535,520);
+    ctx.lineTo(535,530);
     ctx.closePath();
     ctx.fill();
 
     // osa Y
     ctx.beginPath();
     ctx.moveTo(25,525);
-    ctx.lineTo(25,40);
+    ctx.lineTo(25,5);
     ctx.stroke();
-
-    // šipka osy Y
+    
+    // šipka Y
     ctx.beginPath();
-    ctx.moveTo(25,40);
-    ctx.lineTo(20,48);
-    ctx.lineTo(30,48);
+    ctx.moveTo(25,5);
+    ctx.lineTo(20,15);
+    ctx.lineTo(30,15);
     ctx.closePath();
     ctx.fill();
 
-    // číslování X
+    // čísla na ose X
+    ctx.font = "14px Arial";
     for(let i=0;i<=10;i++){
-        ctx.fillText(i,22 + i*krok,545);
+        ctx.fillText(i,20 + i*krok,545);
     }
 
-    // číslování Y
+    // čísla na ose Y
     for(let i=0;i<=10;i++){
         ctx.fillText(i,5,(10-i)*krok+30);
     }
 
     // označení os
-    ctx.font = "bold 18px Arial";
-    ctx.fillText("x",555,530);
-    ctx.fillText("y",25,8);
+    ctx.font = "bold 22px Arial";
+
+    // x za šipkou
+    ctx.fillText("x",560,532);
+
+    // y nad šipkou
+    ctx.fillText("y",18,0);
 }
 
 nakresliSit();
