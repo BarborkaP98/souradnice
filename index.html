@@ -25,7 +25,7 @@ canvas{
 
 <p id="souradnice">Souřadnice:</p>
 
-<canvas id="platno" width="620" height="620"></canvas>
+<canvas id="platno" width="620" height="670"></canvas>
 
 <script>
 
@@ -36,73 +36,93 @@ const krok = 50;
 
 function nakresliSit(){
 
-    ctx.clearRect(0,0,620,620);
+    const levyOkraj = 50;
+    const horniOkraj = 75;
+    const velikostSite = 500;
+
+    ctx.clearRect(0,0,620,670);
 
     // mřížka
     for(let i = 0; i <= 10; i++){
 
         ctx.beginPath();
-        ctx.moveTo(25 + i*krok, 25);
-        ctx.lineTo(25 + i*krok, 525);
+        ctx.moveTo(levyOkraj + i*krok, horniOkraj);
+        ctx.lineTo(levyOkraj + i*krok, horniOkraj + velikostSite);
         ctx.strokeStyle = "#d0d0d0";
         ctx.lineWidth = 1;
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.moveTo(25, 25 + i*krok);
-        ctx.lineTo(525, 25 + i*krok);
+        ctx.moveTo(levyOkraj, horniOkraj + i*krok);
+        ctx.lineTo(levyOkraj + velikostSite, horniOkraj + i*krok);
         ctx.stroke();
     }
 
     // osa X
     ctx.beginPath();
-    ctx.moveTo(25,525);
-    ctx.lineTo(545,525);
+    ctx.moveTo(levyOkraj, horniOkraj + velikostSite);
+    ctx.lineTo(levyOkraj + velikostSite + 20, horniOkraj + velikostSite);
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
     ctx.stroke();
 
     // šipka X
     ctx.beginPath();
-    ctx.moveTo(545,525);
-    ctx.lineTo(535,520);
-    ctx.lineTo(535,530);
+    ctx.moveTo(levyOkraj + velikostSite + 20, horniOkraj + velikostSite);
+    ctx.lineTo(levyOkraj + velikostSite + 10, horniOkraj + velikostSite - 5);
+    ctx.lineTo(levyOkraj + velikostSite + 10, horniOkraj + velikostSite + 5);
     ctx.closePath();
     ctx.fill();
 
     // osa Y
     ctx.beginPath();
-    ctx.moveTo(25,525);
-    ctx.lineTo(25,5);
+    ctx.moveTo(levyOkraj, horniOkraj + velikostSite);
+    ctx.lineTo(levyOkraj, horniOkraj - 30);
     ctx.stroke();
-    
+
     // šipka Y
     ctx.beginPath();
-    ctx.moveTo(25,5);
-    ctx.lineTo(20,15);
-    ctx.lineTo(30,15);
+    ctx.moveTo(levyOkraj, horniOkraj - 30);
+    ctx.lineTo(levyOkraj - 5, horniOkraj - 20);
+    ctx.lineTo(levyOkraj + 5, horniOkraj - 20);
     ctx.closePath();
     ctx.fill();
 
     // čísla na ose X
     ctx.font = "14px Arial";
     for(let i=0;i<=10;i++){
-        ctx.fillText(i,20 + i*krok,545);
+        ctx.fillText(
+            i,
+            levyOkraj - 5 + i*krok,
+            horniOkraj + velikostSite + 22
+        );
     }
 
     // čísla na ose Y
     for(let i=0;i<=10;i++){
-        ctx.fillText(i,5,(10-i)*krok+30);
+        ctx.fillText(
+            i,
+            levyOkraj - 22,
+            horniOkraj + velikostSite - i*krok + 5
+        );
     }
 
     // označení os
     ctx.font = "bold 22px Arial";
 
     // x za šipkou
-    ctx.fillText("x",560,532);
+    ctx.fillText(
+        "x",
+        levyOkraj + velikostSite + 30,
+        horniOkraj + velikostSite + 8
+    );
 
-    // y nad šipkou
-    ctx.fillText("y",18,18);
+    // y NAD šipkou
+    ctx.fillText(
+        "y",
+        levyOkraj - 7,
+        horniOkraj - 45
+    );
 }
 
 nakresliSit();
