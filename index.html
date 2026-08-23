@@ -1,11 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 <head>
-    <title>Souřadnice</title>
+<meta charset="UTF-8">
+<title>Souřadnice</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+canvas{
+    border: 1px solid black;
+    margin-top: 20px;
+}
+</style>
+
 </head>
 <body>
 
-<h1>Ahoj světe!</h1>
+<h1>Procvičování souřadnic</h1>
+
+<p>Klikni do sítě.</p>
+
+<p id="souradnice">Souřadnice:</p>
+
+<canvas id="platno" width="550" height="550"></canvas>
+
+<script>
+
+const canvas = document.getElementById("platno");
+const ctx = canvas.getContext("2d");
+
+const krok = 50;
+
+function nakresliSit(){
+
+    for(let i = 0; i <= 10; i++){
+
+        ctx.beginPath();
+        ctx.moveTo(25 + i*krok, 25);
+        ctx.lineTo(25 + i*krok, 525);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(25, 25 + i*krok);
+        ctx.lineTo(525, 25 + i*krok);
+        ctx.stroke();
+
+        ctx.fillText(i, 20 + i*krok, 20);
+        ctx.fillText(10 - i, 5, 30 + i*krok);
+    }
+}
+
+nakresliSit();
+
+canvas.addEventListener("click", function(e){
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = Math.round((e.clientX - rect.left - 25)/krok);
+    const y = 10 - Math.round((e.clientY - rect.top - 25)/krok);
+
+    document.getElementById("souradnice").innerText =
+        `Souřadnice: [${x},${y}]`;
+
+    ctx.beginPath();
+    ctx.arc(
+        x*krok + 25,
+        (10-y)*krok + 25,
+        5,
+        0,
+        2 * Math.PI
+    );
+    ctx.fill();
+});
+
+</script>
 
 </body>
 </html>
