@@ -138,13 +138,16 @@ canvas.addEventListener("click", function(e){
         `Souřadnice: [${x},${y}]`;
 
     ctx.beginPath();
-    ctx.arc(
-        x*krok + 25,
-        (10-y)*krok + 25,
-        5,
-        0,
-        2 * Math.PI
-    );
+    const levyOkraj = 50;
+const horniOkraj = 75;
+
+ctx.arc(
+    levyOkraj + x*krok,
+    horniOkraj + (10-y)*krok,
+    5,
+    0,
+    2 * Math.PI
+);
     ctx.fill();
 });
 
