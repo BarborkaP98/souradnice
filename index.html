@@ -131,8 +131,16 @@ canvas.addEventListener("click", function(e){
 
     const rect = canvas.getBoundingClientRect();
 
-    const x = Math.round((e.clientX - rect.left - 25)/krok);
-    const y = 10 - Math.round((e.clientY - rect.top - 25)/krok);
+   const levyOkraj = 50;
+const horniOkraj = 75;
+
+const x = Math.round(
+    (e.clientX - rect.left - levyOkraj) / krok
+);
+
+const y = 10 - Math.round(
+    (e.clientY - rect.top - horniOkraj) / krok
+);
 
     document.getElementById("souradnice").innerText =
         `Souřadnice: [${x},${y}]`;
