@@ -1,6 +1,4 @@
 
-<script>
-
 const canvas = document.getElementById("platno");
 const ctx = canvas.getContext("2d");
 
@@ -133,4 +131,3 @@ canvas.addEventListener("click", function(e){
         `Souřadnice: [${x},${y}]`;
 });
 
-</script>
