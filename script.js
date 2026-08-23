@@ -13,6 +13,7 @@ const obrazek = [
 ];
 
 let aktualniBod = 0;
+let odpovedi = [];
 function nakresliSit(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -144,7 +145,7 @@ canvas.addEventListener("click", function(e){
         Math.PI * 2
     );
     ctx.fill();
-
+odpovedi.push([x,y]);
  aktualniBod++;
 zobrazUkol();
 });
