@@ -16,10 +16,10 @@ const obrazky = [
             [5,9],
             [8,6],
             [8,2],
-            [2,2]
+           
         ]
     },
-
+ctx.closePath();
     {
         nazev: "Loďka",
         body: [
@@ -27,20 +27,20 @@ const obrazky = [
             [8,5],
             [6,2],
             [4,2],
-            [2,5]
+          
         ]
     },
-
+ctx.closePath();
     {
         nazev: "Trojúhelník",
         body: [
             [2,2],
             [5,8],
             [8,2],
-            [2,2]
+           
         ]
     }
-
+ctx.closePath();
 ];
 const vybranyObrazek =
     obrazky[Math.floor(Math.random() * obrazky.length)];
