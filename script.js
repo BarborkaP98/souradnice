@@ -211,6 +211,7 @@ function vyhodnot(){
             }
         }
         ctx.closePath();
+        
         ctx.strokeStyle = "blue";
         ctx.lineWidth = 3;
         ctx.stroke();
