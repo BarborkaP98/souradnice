@@ -121,12 +121,26 @@ function vyhodnot(){
 
     for(let i = 0; i < obrazek.length; i++){
 
-        if(
+        const jeSpravne =
             odpovedi[i][0] === obrazek[i][0] &&
-            odpovedi[i][1] === obrazek[i][1]
-        ){
+            odpovedi[i][1] === obrazek[i][1];
+
+        if(jeSpravne){
             spravne++;
         }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            levyOkraj + odpovedi[i][0] * krok,
+            horniOkraj + (10 - odpovedi[i][1]) * krok,
+            8,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = jeSpravne ? "green" : "red";
+        ctx.fill();
     }
 
     document.getElementById("vypis").textContent =
