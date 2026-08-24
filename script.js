@@ -6,10 +6,12 @@ const krok = 50;
 const levyOkraj = 50;
 const horniOkraj = 100;
 const obrazek = [
+    [2,2],
     [2,6],
     [5,9],
     [8,6],
-    [8,2]
+    [8,2],
+    [2,2]
 ];
 
 let aktualniBod = 0;
@@ -114,6 +116,29 @@ if(aktualniBod >= obrazek.length){
 }
     document.getElementById("vypis").textContent =
         `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
+    if(spravne === obrazek.length){
+
+    ctx.beginPath();
+
+    for(let i = 0; i < obrazek.length; i++){
+
+        const x = levyOkraj + obrazek[i][0] * krok;
+        const y = horniOkraj + (10 - obrazek[i][1]) * krok;
+
+        if(i === 0){
+            ctx.moveTo(x, y);
+        }
+        else{
+            ctx.lineTo(x, y);
+        }
+    }
+
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    document.getElementById("vypis").textContent =
+        "Výborně! Obrázek odhalen!";
 }
 function vyhodnot(){
 
