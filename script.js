@@ -19,7 +19,7 @@ const obrazky = [
            
         ]
     },
-ctx.closePath();
+
     {
         nazev: "Loďka",
         body: [
@@ -30,7 +30,7 @@ ctx.closePath();
           
         ]
     },
-ctx.closePath();
+
     {
         nazev: "Trojúhelník",
         body: [
@@ -40,7 +40,7 @@ ctx.closePath();
            
         ]
     }
-ctx.closePath();
+
 ];
 const vybranyObrazek =
     obrazky[Math.floor(Math.random() * obrazky.length)];
@@ -210,7 +210,7 @@ function vyhodnot(){
                 ctx.lineTo(x,y);
             }
         }
-
+        ctx.closePath();
         ctx.strokeStyle = "blue";
         ctx.lineWidth = 3;
         ctx.stroke();
