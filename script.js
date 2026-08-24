@@ -109,46 +109,25 @@ function nakresliSit(){
 }
 function zobrazUkol(){
 
-if(aktualniBod >= obrazek.length){
+    if(aktualniBod >= obrazek.length){
 
-    vyhodnot();
-    return;
-}
-    document.getElementById("vypis").textContent =
-        `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
-    if(spravne === obrazek.length){
-
-    ctx.beginPath();
-
-    for(let i = 0; i < obrazek.length; i++){
-
-        const x = levyOkraj + obrazek[i][0] * krok;
-        const y = horniOkraj + (10 - obrazek[i][1]) * krok;
-
-        if(i === 0){
-            ctx.moveTo(x, y);
-        }
-        else{
-            ctx.lineTo(x, y);
-        }
+        vyhodnot();
+        return;
     }
 
-    ctx.strokeStyle = "blue";
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
     document.getElementById("vypis").textContent =
-        "Výborně! Obrázek odhalen!";
+        `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
 }
 function vyhodnot(){
+
+    nakresliSit();
 
     let spravne = 0;
 
     for(let i = 0; i < obrazek.length; i++){
 
         const jeSpravne =
-            odpovedi[i][0] === obrazek[i][0] &&
-            odpovedi[i][1] === obrazek[i][1];
+            odp[aktualniBodfunctionovedi[i][0] ===          odpovedi[i][1] === obrazek[i][1];
 
         if(jeSpravne){
             spravne++;
@@ -168,8 +147,35 @@ function vyhodnot(){
         ctx.fill();
     }
 
-    document.getElementById("vypis").textContent =
-        `Správně ${spravne} z ${obrazek.length}`;
+    if(spravne === obrazek.length){
+
+        ctx.beginPath();
+
+        for(let i = 0; i < obrazek.length; i++){
+
+            const x = levyOkraj + obrazek[i][0] * krok;
+            const y = horniOkraj + (10 - obrazek[i][1]) * krok;
+
+            if(i === 0){
+                ctx.moveTo(x, y);
+            }
+            else{
+                ctx.lineTo(x, y);
+            }
+        }
+
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        document.getElementById("vypis").textContent =
+            "🎉 Výborně! Obrázek odhalen!";
+    }
+    else{
+
+        document.getElementById("vypis").textContent =
+            `Správně ${spravne} z ${obrazek.length}`;
+    }
 }
 nakresliSit();
 zobrazUkol();
