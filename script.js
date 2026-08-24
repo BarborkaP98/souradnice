@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById("platno");
 const ctx = canvas.getContext("2d");
 
@@ -6,46 +7,71 @@ const krok = 50;
 const levyOkraj = 50;
 const horniOkraj = 100;
 
+// =====================
+// OBRÁZKY
+// =====================
+
 const obrazky = [
 
     {
-        nazev: "Domeček",
+        nazev: "Domecek",
         body: [
             [2,2],
             [2,6],
             [5,9],
             [8,6],
-            [8,2],
-           
+            [8,2]
         ]
     },
 
     {
-        nazev: "Loďka",
-        body: [
-            [2,5],
-            [8,5],
-            [6,2],
-            [4,2],
-          
-        ]
-    },
-
-    {
-        nazev: "Trojúhelník",
+        nazev: "Trojuhelnik",
         body: [
             [2,2],
             [5,8],
+            [8,2]
+        ]
+    },
+
+    {
+        nazev: "Koruna",
+        body: [
+            [1,2],
+            [2,8],
+            [4,4],
+            [6,8],
+            [8,2]
+        ]
+    },
+
+    {
+        nazev: "Lodka",
+        body: [
+            [2,2],
             [8,2],
-           
+            [6,5],
+            [4,5]
+        ]
+    },
+
+    {
+        nazev: "Sipka",
+        body: [
+            [2,5],
+            [6,5],
+            [6,8],
+            [9,5],
+            [6,2],
+            [6,5]
         ]
     }
-
 ];
+
 const vybranyObrazek =
     obrazky[Math.floor(Math.random() * obrazky.length)];
 
 const obrazek = vybranyObrazek.body;
+
 let aktualniBod = 0;
 let odpovedi = [];
 
@@ -57,7 +83,6 @@ function nakresliSit(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    // mřížka
     ctx.strokeStyle = "#d9d9d9";
     ctx.lineWidth = 1;
 
@@ -74,7 +99,6 @@ function nakresliSit(){
         ctx.stroke();
     }
 
-    // osa X
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
 
@@ -83,7 +107,6 @@ function nakresliSit(){
     ctx.lineTo(levyOkraj + 520, horniOkraj + 500);
     ctx.stroke();
 
-    // šipka X
     ctx.beginPath();
     ctx.moveTo(levyOkraj + 520, horniOkraj + 500);
     ctx.lineTo(levyOkraj + 510, horniOkraj + 494);
@@ -91,13 +114,11 @@ function nakresliSit(){
     ctx.closePath();
     ctx.fill();
 
-    // osa Y
     ctx.beginPath();
     ctx.moveTo(levyOkraj, horniOkraj + 500);
     ctx.lineTo(levyOkraj, horniOkraj - 30);
     ctx.stroke();
 
-    // šipka Y
     ctx.beginPath();
     ctx.moveTo(levyOkraj, horniOkraj - 30);
     ctx.lineTo(levyOkraj - 6, horniOkraj - 18);
@@ -105,11 +126,9 @@ function nakresliSit(){
     ctx.closePath();
     ctx.fill();
 
-    // čísla X
     ctx.font = "14px Arial";
 
     for(let i=0;i<=10;i++){
-
         ctx.fillText(
             i,
             levyOkraj + i*krok - 4,
@@ -117,9 +136,7 @@ function nakresliSit(){
         );
     }
 
-    // čísla Y
     for(let i=0;i<=10;i++){
-
         ctx.fillText(
             i,
             levyOkraj - 25,
@@ -127,7 +144,6 @@ function nakresliSit(){
         );
     }
 
-    // popisky os
     ctx.font = "bold 22px Arial";
 
     ctx.fillText(
@@ -150,7 +166,6 @@ function nakresliSit(){
 function zobrazUkol(){
 
     if(aktualniBod >= obrazek.length){
-
         vyhodnot();
         return;
     }
@@ -165,7 +180,6 @@ function zobrazUkol(){
 
 function vyhodnot(){
 
-    // překreslíme síť
     nakresliSit();
 
     let spravne = 0;
@@ -194,7 +208,6 @@ function vyhodnot(){
         ctx.fill();
     }
 
-    // při 100 % spoj body
     if(spravne === obrazek.length){
 
         ctx.beginPath();
@@ -210,8 +223,9 @@ function vyhodnot(){
                 ctx.lineTo(x,y);
             }
         }
+
         ctx.closePath();
-        
+
         ctx.strokeStyle = "blue";
         ctx.lineWidth = 3;
         ctx.stroke();
@@ -225,14 +239,7 @@ function vyhodnot(){
             `Správně ${spravne} z ${obrazek.length}`;
     }
 }
-function restartHry(){
 
-    aktualniBod = 0;
-    odpovedi = [];
-
-    nakresliSit();
-    zobrazUkol();
-}
 // =====================
 // START
 // =====================
