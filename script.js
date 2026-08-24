@@ -58,7 +58,7 @@ const obrazky = [
             [1,5],
             [4,6]
             ]      
-}
+},
 
     {
         nazev: "Lodka",
