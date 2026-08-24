@@ -6,15 +6,46 @@ const krok = 50;
 const levyOkraj = 50;
 const horniOkraj = 100;
 
-const obrazek = [
-    [2,2],
-    [2,6],
-    [5,9],
-    [8,6],
-    [8,2],
-    [2,2]
-];
+const obrazky = [
 
+    {
+        nazev: "Domeček",
+        body: [
+            [2,2],
+            [2,6],
+            [5,9],
+            [8,6],
+            [8,2],
+            [2,2]
+        ]
+    },
+
+    {
+        nazev: "Loďka",
+        body: [
+            [2,2],
+            [8,2],
+            [6,5],
+            [4,5],
+            [2,2]
+        ]
+    },
+
+    {
+        nazev: "Trojúhelník",
+        body: [
+            [2,2],
+            [5,8],
+            [8,2],
+            [2,2]
+        ]
+    }
+
+];
+const vybranyObrazek =
+    obrazky[Math.floor(Math.random() * obrazky.length)];
+
+const obrazek = vybranyObrazek.body;
 let aktualniBod = 0;
 let odpovedi = [];
 
