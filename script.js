@@ -5,6 +5,7 @@ const krok = 50;
 
 const levyOkraj = 50;
 const horniOkraj = 100;
+
 const obrazek = [
     [2,2],
     [2,6],
@@ -16,6 +17,11 @@ const obrazek = [
 
 let aktualniBod = 0;
 let odpovedi = [];
+
+// =====================
+// KRESLENÍ SÍTĚ
+// =====================
+
 function nakresliSit(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -26,13 +32,11 @@ function nakresliSit(){
 
     for(let i = 0; i <= 10; i++){
 
-        // svislé čáry
         ctx.beginPath();
         ctx.moveTo(levyOkraj + i*krok, horniOkraj);
         ctx.lineTo(levyOkraj + i*krok, horniOkraj + 500);
         ctx.stroke();
 
-        // vodorovné čáry
         ctx.beginPath();
         ctx.moveTo(levyOkraj, horniOkraj + i*krok);
         ctx.lineTo(levyOkraj + 500, horniOkraj + i*krok);
@@ -107,6 +111,11 @@ function nakresliSit(){
         horniOkraj - 45
     );
 }
+
+// =====================
+// ZADÁNÍ
+// =====================
+
 function zobrazUkol(){
 
     if(aktualniBod >= obrazek.length){
@@ -118,8 +127,14 @@ function zobrazUkol(){
     document.getElementById("vypis").textContent =
         `Klikni na bod [${obrazek[aktualniBod][0]},${obrazek[aktualniBod][1]}]`;
 }
+
+// =====================
+// VYHODNOCENÍ
+// =====================
+
 function vyhodnot(){
 
+    // překreslíme síť
     nakresliSit();
 
     let spravne = 0;
@@ -127,7 +142,8 @@ function vyhodnot(){
     for(let i = 0; i < obrazek.length; i++){
 
         const jeSpravne =
-            odp[aktualniBodfunctionovedi[i][0] ===          odpovedi[i][1] === obrazek[i][1];
+            odpovedi[i][0] === obrazek[i][0] &&
+            odpovedi[i][1] === obrazek[i][1];
 
         if(jeSpravne){
             spravne++;
@@ -147,6 +163,7 @@ function vyhodnot(){
         ctx.fill();
     }
 
+    // při 100 % spoj body
     if(spravne === obrazek.length){
 
         ctx.beginPath();
@@ -157,10 +174,9 @@ function vyhodnot(){
             const y = horniOkraj + (10 - obrazek[i][1]) * krok;
 
             if(i === 0){
-                ctx.moveTo(x, y);
-            }
-            else{
-                ctx.lineTo(x, y);
+                ctx.moveTo(x,y);
+            } else {
+                ctx.lineTo(x,y);
             }
         }
 
@@ -177,8 +193,17 @@ function vyhodnot(){
             `Správně ${spravne} z ${obrazek.length}`;
     }
 }
+
+// =====================
+// START
+// =====================
+
 nakresliSit();
 zobrazUkol();
+
+// =====================
+// KLIKNUTÍ
+// =====================
 
 canvas.addEventListener("click", function(e){
 
@@ -196,6 +221,8 @@ canvas.addEventListener("click", function(e){
         return;
     }
 
+    ctx.fillStyle = "black";
+
     ctx.beginPath();
     ctx.arc(
         levyOkraj + x*krok,
@@ -205,8 +232,10 @@ canvas.addEventListener("click", function(e){
         Math.PI * 2
     );
     ctx.fill();
-odpovedi.push([x,y]);
- aktualniBod++;
-zobrazUkol();
-});
 
+    odpovedi.push([x,y]);
+
+    aktualniBod++;
+
+    zobrazUkol();
+});
