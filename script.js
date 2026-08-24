@@ -193,7 +193,14 @@ function vyhodnot(){
             `Správně ${spravne} z ${obrazek.length}`;
     }
 }
+function restartHry(){
 
+    aktualniBod = 0;
+    odpovedi = [];
+
+    nakresliSit();
+    zobrazUkol();
+}
 // =====================
 // START
 // =====================
