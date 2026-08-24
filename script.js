@@ -1,4 +1,4 @@
-
+    
 const canvas = document.getElementById("platno");
 const ctx = canvas.getContext("2d");
 
@@ -32,17 +32,33 @@ const obrazky = [
             [8,2]
         ]
     },
-
     {
-        nazev: "Koruna",
+        nazev: "Srdce",
         body: [
-            [1,2],
-            [2,8],
-            [4,4],
-            [6,8],
-            [8,2]
+            [5,1],
+            [8,4],
+            [8,7],
+            [6,9],
+            [5,8],
+            [4,9],
+            [2,7],
+            [2,4]
         ]
     },
+
+    {
+        nazev: "Hvezda",
+        body: [
+          [5,9],
+            [6,6],
+            [9,5],
+            [6,4],
+            [5,1],
+            [4,4],
+            [1,5],
+            [4,6]
+            ]      
+}
 
     {
         nazev: "Lodka",
