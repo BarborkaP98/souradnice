@@ -87,7 +87,8 @@ const vybranyObrazek =
     obrazky[Math.floor(Math.random() * obrazky.length)];
 
 const obrazek = vybranyObrazek.body;
-
+console.log(obrazky.length);
+console.log(vybranyObrazek.nazev);
 let aktualniBod = 0;
 let odpovedi = [];
 
