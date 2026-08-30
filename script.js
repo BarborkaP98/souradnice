@@ -301,3 +301,12 @@ canvas.addEventListener("click", function(e){
 
     zobrazUkol();
 });
+function restartHry(){
+
+    aktualniBod = 0;
+    odpovedi = [];
+
+    nakresliSit();
+    zobrazUkol();
+}
+
